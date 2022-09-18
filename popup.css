@@ -1,0 +1,16 @@
+body{
+	background-color: rgb(183, 182, 182);
+	padding: 3px;
+}
+.popup{
+	min-width: 100px;
+	min-height: 100px;
+}
+h5{
+	font-size: 12px;
+	text-align: center;
+}
+p{
+	font-size: 10px;
+	text-align: center;
+}

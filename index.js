@@ -52,6 +52,7 @@ function setCaretToPos(elem, pos) {
 	sel.addRange(range);
 }
 
+
 function replaceSelectedWord(event, word, start, end) {
 	const currentValue = event.target.value || event.target.innerText;
 
@@ -66,7 +67,6 @@ function replaceSelectedWord(event, word, start, end) {
 			listItem.classList.add('list-of-words__item');
 			listItem.innerHTML = value;
 			listOfWords.appendChild(listItem);
-
 			if (!event.pageX && !event.pageX) {
 				listOfWords.style.left = event.target.offsetWidth / 2 + 'px';
 			} else {
@@ -74,17 +74,19 @@ function replaceSelectedWord(event, word, start, end) {
 				listOfWords.style.left = window.event.clientX - 10 + 'px';
 			}
 		});
+		const hasListOfWords = document.querySelector('.list-of-words__block');
+		hasListOfWords && hasListOfWords.remove();
 
-		document.querySelector('.list-of-words__block') && document.querySelector('.list-of-words__block').remove();
+		event.type === 'click' ?
+			document.body.insertAdjacentElement('beforeend', listOfWords) :
+			event.target.insertAdjacentElement('afterend', listOfWords);
 
-		event.target.insertAdjacentElement('afterend', listOfWords);
 
 		document.querySelectorAll('.list-of-words__item').forEach((item) => {
 			item.addEventListener('click', (innerEvent) => {
 				const newStr = currentValue.replace(regExp, (wordToReplace, index) => {
 					if (index === start) {
 						wordToReplace = innerEvent.target.innerHTML + (currentValue[end] === ' ' ? '' : ' ');
-
 						return wordToReplace;
 					} else {
 						return wordToReplace;
@@ -94,7 +96,9 @@ function replaceSelectedWord(event, word, start, end) {
 				event.target.value
 					? event.target.value = newStr
 					: event.target.innerText = newStr;
+
 				document.querySelector('.list-of-words__block').remove();
+
 				event.target.focus();
 				event.target.setSelectionRange
 					? event.target.setSelectionRange(end, end)
@@ -102,8 +106,8 @@ function replaceSelectedWord(event, word, start, end) {
 			})
 		})
 	} else {
-		const listOfWords = document.querySelector('.list-of-words__block');
-		listOfWords && listOfWords.remove()
+		const hasListOfWords = document.querySelector('.list-of-words__block');
+		hasListOfWords && hasListOfWords.remove()
 	}
 };
 
@@ -114,11 +118,14 @@ window.addEventListener('focus', (event) => {
 
 	inputs.forEach(element => {
 		element.addEventListener('click', (event) => {
+			console.log(event);
 			const { word, start, end } = findWord(event.target.value, event.target.selectionStart);
 			replaceSelectedWord(event, word, start, end);
 		})
 		element.style.position = 'relative'
 		element.addEventListener('keyup', (event) => {
+			console.log(event);
+
 			const isSpace = event.code === 'Space';
 			const { target: { value, selectionStart }, code } = event;
 

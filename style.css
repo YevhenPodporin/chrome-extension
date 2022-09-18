@@ -1,11 +1,11 @@
 .list-of-words__block{
 	background: rgb(155, 177, 182);
 	position: absolute;
-	z-index: 9999;
+	z-index: 20000000000;
 	margin-top: 5px;
 	border-radius: 5px;
 	padding: 3px;
-	
+	display: block;
 }
 .list-of-words__block::before {
 	content: " ";

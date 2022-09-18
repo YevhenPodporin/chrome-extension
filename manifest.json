@@ -3,6 +3,10 @@
 	"description": "test-task",
 	"version": "1.0",
 	"manifest_version": 3,
+	"action": {
+		"default_title": "Replace words extension",
+		"default_popup": "popup.html"
+	},
 	"content_scripts": [
 		{
 			"matches": [
@@ -23,6 +27,8 @@
 		"64": "img/icon-64.png"
 	},
 	"permissions": [
-		"storage"
+		"storage",
+		"activeTab",
+		"scripting"
 	]
 }
