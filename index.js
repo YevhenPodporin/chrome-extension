@@ -118,14 +118,11 @@ window.addEventListener('focus', (event) => {
 
 	inputs.forEach(element => {
 		element.addEventListener('click', (event) => {
-			console.log(event);
 			const { word, start, end } = findWord(event.target.value, event.target.selectionStart);
 			replaceSelectedWord(event, word, start, end);
 		})
 		element.style.position = 'relative'
 		element.addEventListener('keyup', (event) => {
-			console.log(event);
-
 			const isSpace = event.code === 'Space';
 			const { target: { value, selectionStart }, code } = event;
 
