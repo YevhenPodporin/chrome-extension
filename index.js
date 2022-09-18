@@ -77,10 +77,9 @@ function replaceSelectedWord(event, word, start, end) {
 		const hasListOfWords = document.querySelector('.list-of-words__block');
 		hasListOfWords && hasListOfWords.remove();
 
-		event.type === 'click' ?
-			document.body.insertAdjacentElement('beforeend', listOfWords) :
-			event.target.insertAdjacentElement('afterend', listOfWords);
-
+		event.type === 'click'
+			? document.body.insertAdjacentElement('beforeend', listOfWords)
+			: event.target.insertAdjacentElement('afterend', listOfWords);
 
 		document.querySelectorAll('.list-of-words__item').forEach((item) => {
 			item.addEventListener('click', (innerEvent) => {
@@ -120,8 +119,8 @@ window.addEventListener('focus', (event) => {
 		element.addEventListener('click', (event) => {
 			const { word, start, end } = findWord(event.target.value, event.target.selectionStart);
 			replaceSelectedWord(event, word, start, end);
-		})
-		element.style.position = 'relative'
+		});
+
 		element.addEventListener('keyup', (event) => {
 			const isSpace = event.code === 'Space';
 			const { target: { value, selectionStart }, code } = event;
